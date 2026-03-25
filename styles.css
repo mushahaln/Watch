@@ -1,0 +1,304 @@
+:root {
+    --bg-color: #000000; /* Force absolute black to match image assets */
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --accent-gold: #cba171; /* Rose Gold approximation */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Typography Customization */
+h1, h2 {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Nav */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+
+.logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: var(--accent-gold);
+}
+
+/* Smooth Scroll Wrapper */
+.smooth-scroll-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Shared Section Styles */
+section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10vw;
+    z-index: 10;
+}
+
+/* Hero Section */
+.hero {
+    justify-content: center;
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+    width: 100%;
+}
+
+.hero h1 {
+    font-size: 6vw;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.hero .subtitle {
+    font-size: 1.2vw;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
+}
+
+/* Image Sequence Canvas */
+.canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+#hero-lightpass {
+    width: 100%;
+    height: 100%;
+}
+
+/* Details Section */
+.mechanical-mastery {
+    justify-content: flex-start;
+}
+
+.content-block {
+    max-width: 400px;
+}
+
+.content-block h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.specs {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.spec-value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.spec-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+}
+
+.materials {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.materials .content-block {
+    margin-right: 0;
+}
+
+/* Watch Gallery Section */
+.watch-gallery {
+    flex-direction: column;
+    padding: 15vh 5vw 5vh 5vw;
+    align-items: center;
+    background: linear-gradient(to bottom, var(--bg-color), #0a0a0a);
+    z-index: 10;
+}
+
+.gallery-title {
+    font-size: 3rem;
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.gallery-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    opacity: 0; /* managed by GSAP */
+    transform: translateY(50px);
+    transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gallery-card:hover { /* Override GSAP transform using important to still allow hover jump */
+    border-color: rgba(203, 161, 113, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.img-container {
+    width: 100%;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 25px rgba(0,0,0,0.8));
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery-card:hover .img-container img {
+    transform: scale(1.08) translateY(-5px);
+}
+
+.card-info h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.card-info p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Glint Effect */
+.glint-text {
+    background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ffffff 40%,
+        var(--accent-gold) 50%,
+        #ffffff 60%,
+        #ffffff 100%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: flowLight 4s linear infinite;
+}
+
+@keyframes flowLight {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Footer */
+.footer {
+    padding: 4rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    z-index: 10;
+    position: relative;
+    background: var(--bg-color);
+    margin-top: 50vh; /* space for last scroll */
+}
+
+.footer-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    color: #444;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 10vw; }
+    .hero .subtitle { font-size: 3vw; }
+    section { padding: 0 5vw; flex-direction: column; justify-content: center !important; text-align: center !important; }
+}
